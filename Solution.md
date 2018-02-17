@@ -14,3 +14,12 @@ This page displays the user about their booking status and time details of the F
 LOGIN:
 Dummy Login without back end.
 
+The app is done in Ionic & Angular framework V1.
+Being a hybrid app it can be rendered in both mobile and browser. The corresponding screenshots are attached see under screenshots folder.
+
+Running the app :
+To see in browser : ionic serve
+To see in Mobile : ionic cordova run android
+
+
+
