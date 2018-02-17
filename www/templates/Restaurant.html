@@ -1,0 +1,29 @@
+<ion-view view-title="Restaurant Details">
+  <ion-content>
+  	<div class="bar bar-header item-input-inset" style="background-color:#AED6F1">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="Enter PlaceName/latitude/longitude" ng-model="myModel.searchTerm">
+        </label>
+        <button ng-if="myModel.searchTerm" class="button button-positive" ng-click="getData(myModel.searchTerm)">
+          Search
+        </button>
+      </div>
+  	<div class="list card"  ion-scroll>
+            <div ng-repeat="item in data">
+	            <label class="item item-divider">{{$index+1}}&nbsp;&nbsp;{{item.title}}
+	                <span class="input-label"></span>	            
+	            </label>
+	            <label class="item item-input">
+	                <span class="input-label">Entity Type</span>
+	                <input type="text" value="{{item.entity_type}}" >
+	            </label>
+	            <label class="item item-input">
+	                <span class="input-label">City</span>
+	                <input type="text" value="{{item.city_name}}" >
+	            </label>
+	        </div>
+            </ion-list>
+     </div>
+  </ion-content>
+</ion-view>

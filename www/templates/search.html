@@ -1,0 +1,61 @@
+<ion-view view-title="NearBy Weather Check">
+  <ion-content scroll="false">
+   <div id="top_div">
+    <!--div class="container"><p><button class="button button-positive button-small" ng-click="centerOnMe()">CentreOnMe</button></p></div-->
+      <div class="mapWrap"  data-tap-disabled="true">
+        <map center="{{centerOnMe.latitude}}, {{centerOnMe.longitude}}" zoom="15">          
+        </map> 
+      </div>
+    </div>
+    <div id="bottom_div">
+      <div class="bar bar-header item-input-inset" style="background-color:#AED6F1">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="Enter PlaceName/latitude/longitude" ng-model="myModel.searchTerm">
+        </label>
+        <button ng-if="myModel.searchTerm" class="button button-positive" ng-click="getData(myModel.searchTerm)">
+          Search
+        </button>
+      </div>
+      <div class="list card" ng-show="showDetails" ion-scroll>
+            <ion-list>
+              <label class="item item-divider">
+                <span class="input-label">{{data.request[0].query}}</span>
+              </label>
+                <label class="item item-input">
+                    <span class="input-label">Weather Description</span>
+                    <input type="text" value="{{data.current_condition[0].weatherDesc[0].value}}" placeholder="" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Temperature</span>
+                    <input type="text" value="{{data.current_condition[0].temp_C}} C" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">FeelsLike</span>
+                    <input type="text" value="{{data.current_condition[0].FeelsLikeC}} C" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Precipitation</span>
+                    <input type="text" value="{{data.current_condition[0].precipMM}} mm" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Humidity</span>
+                    <input type="text" value="{{data.current_cont_condition[0].humidity}} mm" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">CloudOver</span>
+                    <input type="text" value="{{data.current_condition[0].cloudcover}}" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Pressure</span>
+                    <input type="text" value="{{data.current_condition[0].pressure}}" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">WindSpeed</span>
+                    <input type="text" value="{{data.current_condition[0].windspeedKmph}} kmph" placeholder="">
+                </label>
+            </ion-list>
+          </div>
+    </div>
+    </ion-content>
+</ion-view>

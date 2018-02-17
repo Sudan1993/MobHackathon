@@ -1,0 +1,51 @@
+<ion-view view-title="Booking Details">
+  <ion-content>
+  	<div class="list card"  ion-scroll>
+            <ion-list>
+            <label class="item item-divider">
+                <span class="input-label">{{bookingDetails.BookingStatus}}:Trip1</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">From and To</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment0[0].DepartureStation}}&nbsp;&nbsp;To&nbsp;&nbsp;{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment0[0].ArrivalStation}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Departure Time</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment0[0].DepartureTime}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Arrival Time</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment0[0].ArrivalTime}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Flight No.</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment0[0].FlightDesignator.FlightNumber}}" >
+            </label>
+            </ion-list>
+          </div>
+
+          <div class="list card"  ion-scroll>
+            <ion-list>
+            <label class="item item-divider">
+                <span class="input-label">{{bookingDetails.BookingStatus}}:Trip2</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">From and To</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment1[0].DepartureStation}}&nbsp;&nbsp;To&nbsp;&nbsp;{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment1[0].ArrivalStation}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Departure Time</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment1[0].DepartureTime}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Arrival Time</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment1[0].ArrivalTime}}" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Flight No.</span>
+                <input type="text" value="{{bookingDetails.JourneyServices.JourneyService[0].Segments.Segment1[0].FlightDesignator.FlightNumber}}" >
+            </label>
+            </ion-list>
+          </div>
+  </ion-content>
+</ion-view>
