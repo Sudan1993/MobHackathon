@@ -41,136 +41,34 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('RestaurantCtrl', function($scope,$rootScope,httpService) {
-  $scope.getData = function(searchTerm){
-    $scope.zomatoApi();
-  };
-   $scope.myModel = {};
+.controller('RestaurantCtrl', function($scope,$rootScope,httpService,$ionicModal) {
   
-$scope.zomatoApi = {
-    "location_suggestions": [
-        {
-            "entity_type": "city",
-            "entity_id": 4,
-            "title": "Bangalore",
-            "latitude": 12.971606,
-            "longitude": 77.594376,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 1992,
-            "title": "Bengaluru Marriott Hotel Whitefield, Bangalore",
-            "latitude": 12.9790579876,
-            "longitude": 77.727449052,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "zomato_place",
-            "entity_id": 99258,
-            "title": "Bengaluru - Mangaluru Highway, Peenya II Phase, Bangalore",
-            "latitude": 13.03729385,
-            "longitude": 77.522398375,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 40130,
-            "title": "VR Bengaluru, Whitefield, Bangalore",
-            "latitude": 12.9966520355,
-            "longitude": 77.695222646,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 41725,
-            "title": "Conrad Bengaluru, Ulsoor, Bangalore",
-            "latitude": 12.975249,
-            "longitude": 77.62069,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 854,
-            "title": "Novotel Bengaluru Techpark, Marathahalli, Bangalore",
-            "latitude": 12.9295270052,
-            "longitude": 77.6833961159,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 978,
-            "title": "Casa de Bengaluru, Koramangala, Bangalore",
-            "latitude": 12.9362248335,
-            "longitude": 77.6223148406,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 2022,
-            "title": "Radha Regent Bengaluru, Electronic City, Bangalore",
-            "latitude": 12.8363858304,
-            "longitude": 77.6616092026,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 3108,
-            "title": "JW Marriott Bengaluru, Lavelle Road, Bangalore",
-            "latitude": 12.971681,
-            "longitude": 77.595208,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        },
-        {
-            "entity_type": "group",
-            "entity_id": 6158,
-            "title": "Aloft Bengaluru Cessna Business Park, Bellandur, Bangalore",
-            "latitude": 12.9374070729,
-            "longitude": 77.6935704052,
-            "city_id": 4,
-            "city_name": "Bangalore",
-            "country_id": 1,
-            "country_name": "India"
-        }
-    ],
-    "status": "success",
-    "has_more": 0,
-    "has_total": 0
-};
-$scope.data = $scope.zomatoApi.location_suggestions;
-  httpService.invokeZomato('bengaluru').then(function(response){
-      $rootScope.data = response.data.data;
-        $scope.showDetails = true;     
-      //alert($rootScope.data);
+$scope.myModel = {};
+
+$scope.getData = function(searchTerm){ 
+    httpService.invokeZomato(searchTerm).then(function(response){
+      //alert(JSON.stringify(response));
+      $rootScope.data = response.data.location_suggestions;
+        $scope.showDetails = true; 
   
     });
+  };
+
+  $ionicModal.fromTemplateUrl('templates/RestaurantDetails.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal1 = modal;
+  });
+
+  $scope.getDetails = function(itemClicked){ 
+   
+    httpService.invokeLocationDetails(itemClicked.entity_id,itemClicked.entity_type).then(function(response){
+      alert(JSON.stringify(response));
+      $scope.loginData={'popularity':response.data,'bestrestaurants':response.data.best_rated_restaurant};       
+     $scope.modal1.show();
+    });
+  };
+
   })
 
 .controller('PlaylistsCtrl', function($scope,$rootScope) {
@@ -295,7 +193,7 @@ $rootScope.bookingDetails =
       template: 'Loading...'
     });
 
-
+//$cordovaGeolocation.getCurrentPosition(function(position) {
     navigator.geolocation.getCurrentPosition(function(position) {
       $scope.centerOnMe = {};
       $scope.centerOnMe.latitude = position.coords.latitude;

@@ -9,19 +9,19 @@
           Search
         </button>
       </div>
-  	<div class="list card"  ion-scroll>
+  	<div class="list"  ion-scroll>
             <div ng-repeat="item in data">
-	            <label class="item item-divider">{{$index+1}}&nbsp;&nbsp;{{item.title}}
-	                <span class="input-label"></span>	            
+	            <label class="item " ng-click="getDetails(item)">{{$index+1}}.&nbsp;&nbsp;{{item.title}}
+	                <!--span class="input-label"></span-->	            
 	            </label>
-	            <label class="item item-input">
+	            <!--label class="item item-input">
 	                <span class="input-label">Entity Type</span>
 	                <input type="text" value="{{item.entity_type}}" >
 	            </label>
 	            <label class="item item-input">
 	                <span class="input-label">City</span>
 	                <input type="text" value="{{item.city_name}}" >
-	            </label>
+	            </label-->
 	        </div>
             </ion-list>
      </div>
